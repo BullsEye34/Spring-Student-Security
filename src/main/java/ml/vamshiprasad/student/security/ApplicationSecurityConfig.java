@@ -32,7 +32,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("STUDENT")
                 .build();
 
-        return new InMemoryUserDetailsManager(vamshiUser);
+        UserDetails adminUser = User.builder()
+                .username("admin")
+                .password(passwordEncoder.encode("admin123"))
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(
+                vamshiUser,
+                adminUser
+                );
     }
 
     @Override
